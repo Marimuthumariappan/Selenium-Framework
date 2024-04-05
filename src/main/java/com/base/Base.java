@@ -13,14 +13,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Base implements SeleniumAPI {
+public class Base  {
 
 	long Timeouts = 30;
 	long MaxwaitTime = 10;
-	RemoteWebDriver driver = null;
-	WebDriverWait wait = null;
+	protected static RemoteWebDriver driver = null;
+	public WebDriverWait wait = null;
 
-	@Override
 	public void browseropen(String url) {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -29,7 +28,6 @@ public class Base implements SeleniumAPI {
 
 	}
 
-	@Override
 	public void setup(Browser browsername, String url) {
 		switch (browsername) {
 		case CHROME:
@@ -53,17 +51,14 @@ public class Base implements SeleniumAPI {
 		driver.get(url);
 	}
 
-	@Override
 	public void close() {
 		driver.close();
 	}
 
-	@Override
 	public void quit() {
 		driver.quit();
 	}
 
-	@Override
 	public WebElement element(Locators type, String value) {
 
 		try {
@@ -96,69 +91,10 @@ public class Base implements SeleniumAPI {
 		return null;
 	}
 
-	@Override
-	public void click(WebElement element) {
 
-		WebElement ELEMENT = wait.withMessage("Element is Not Clickable")
-				.until(ExpectedConditions.elementToBeClickable(element));
-		ELEMENT.click();
-	}
 
-	@Override
-	public void type(WebElement element, String Testdata) {
-		try {
-			WebElement ELEMENT = wait.until(ExpectedConditions.visibilityOf(element));
-			ELEMENT.clear();
-			ELEMENT.sendKeys(Testdata);
-		} catch (NullPointerException e) {
-			System.err.println("Element is Null" + e.getMessage());
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-	}
+	
+	
 
-	@Override
-	public void typeandEnter(WebElement elemnt, String Testdata, Keys key) {
-		WebElement ELEMENT = wait.until(ExpectedConditions.visibilityOf(elemnt));
-		ELEMENT.clear();
-		ELEMENT.sendKeys(Testdata, key);
-	}
-
-	@Override
-	public void selectvalue(WebElement element, String value) {
-
-	}
-
-	@Override
-	public void selecttext(WebElement element, String text) {
-
-	}
-
-	@Override
-	public void selectindex(WebElement element, int position) {
-
-	}
-
-	@Override
-	public void appendText(WebElement element) {
-
-	}
-
-	@Override
-	public String getTitle() {
-
-		return null;
-	}
-
-	@Override
-	public String getText() {
-
-		return null;
-	}
-
-	@Override
-	public boolean isDisplayed() {
-		return false;
-	}
 
 }
