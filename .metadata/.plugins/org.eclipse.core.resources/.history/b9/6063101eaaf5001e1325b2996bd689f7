@@ -1,0 +1,12 @@
+package com.pages;
+
+import org.openqa.selenium.support.PageFactory;
+
+import com.base.Base;
+
+public class Homepage extends Base {
+	public Homepage() {
+		PageFactory.initElements(RemoteWebDriver, this);
+		
+	}
+}

@@ -1,0 +1,22 @@
+package com.test;
+
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.base.Base;
+import com.base.Browser;
+import com.steps.HomepageSteps;
+
+public class TC001 	extends Base {
+	private HomepageSteps homepageSteps;
+	
+	@BeforeTest
+	public void BrowserOpen() {
+		browseropen("https://www.orangehrm.com/");
+	}
+	@Test
+	public void HeaderVerify() throws Exception {
+		homepageSteps.displayedOnHeaders();
+	}
+	
+}
