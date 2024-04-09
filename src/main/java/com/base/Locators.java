@@ -2,5 +2,9 @@ package com.base;
 
 public enum Locators {
 	
-    id, name, classname, xpath, css,tagname
-}
+	 ID,
+	    NAME,
+	    CLASSNAME,
+	    TAGNAME,
+	    XPATH,
+	    CSS}
