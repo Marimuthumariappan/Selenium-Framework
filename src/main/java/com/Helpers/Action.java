@@ -1,5 +1,6 @@
 package com.Helpers;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.base.Base;
+import com.base.Locators;
 
 public class Action extends Base {
 
@@ -17,23 +19,24 @@ public class Action extends Base {
 		ELEMENT.click();
 	}
 
-	public void type(WebElement element, String Testdata) {
-		try {
-			WebElement ELEMENT = wait.until(ExpectedConditions.visibilityOf(element));
-			ELEMENT.clear();
-			ELEMENT.sendKeys(Testdata);
-		} catch (NullPointerException e) {
-			System.err.println("Element is Null" + e.getMessage());
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
+	public void type(Locators type, By value, String testData) {
+	    try {
+	        WebElement visibleElement = Waiters.waitForElementToBeVisible(value);
+	        visibleElement.clear();
+	        visibleElement.sendKeys(testData);
+	    } catch (NullPointerException e) {
+	        System.err.println("Element is Null" + e.getMessage());
+	    } catch (Exception e) {
+	        System.err.println(e.getMessage());
+	    }
 	}
 
-	public void typeandEnter(WebElement elemnt, String Testdata, Keys key) {
-		WebElement ELEMENT = wait.until(ExpectedConditions.visibilityOf(elemnt));
-		ELEMENT.clear();
-		ELEMENT.sendKeys(Testdata, key);
-	}
+
+	public void typeandEnter(Locators type, By value, String testData, Keys key) {
+        WebElement visibleElement = Waiters.waitForElementToBeVisible(type, value);
+        visibleElement.clear();
+        visibleElement.sendKeys(testData, key);
+    }
 
 	public boolean Selectbyvalue(WebElement element, String value) {
 		boolean flag = false;
@@ -102,5 +105,15 @@ public class Action extends Base {
 		
            return driver.getCurrentUrl();
 	}
+	
+	public boolean isDisplayed(WebElement ele) {
+		return ele.isDisplayed();
+	
+	
+}
+	   public String getText(Locators type, By value) {
+	        WebElement element = element(type, value);
+	        return element.getText();
+	    }
 
 }
